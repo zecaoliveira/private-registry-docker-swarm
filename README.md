@@ -85,11 +85,11 @@ $ mkdir =p certs
 
 5.2 - Copiar os certificados "myregistry.domain.com.crt" e "myregistry.domain.com.key" para o diretório ~/certs:
 
-SCP: comando de transferência segura em sistemas UNIX.
-/home/$USER/certs: diretório onde estão armazenados os certificados que foram criados.
-sysadmx: conta configurada para a administração do host do Docker (Ubuntu Server por exemplo) sem permissão root.
-172.31.0.100: IP do servidor host do Docker.
-~/certs/: diretório dentro do servidor 172.31.0.100 para onde será enviado os arquivos dos certificados, é o mesmo que "/home/sysadmx/certs".
+- SCP: comando de transferência segura em sistemas UNIX.
+- /home/$USER/certs: diretório onde estão armazenados os certificados que foram criados.
+- sysadmx: conta configurada para a administração do host do Docker (Ubuntu Server por exemplo) sem permissão root.
+- 172.31.0.100: IP do servidor host do Docker.
+- ~/certs/: diretório dentro do servidor 172.31.0.100 para onde será enviado os arquivos dos certificados, é o mesmo que "/home/sysadmx/certs".
 
 ```
 scp /home/$USER/certs sysadmx@172.31.0.100:~/certs/
