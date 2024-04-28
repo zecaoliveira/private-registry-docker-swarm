@@ -113,7 +113,7 @@ docker service create --name my_registry --publish=5000:5000 \
 -e REGISTRY_HTTP_TLS_KEY=/certs/jager.net.key \
 registry:2
 ```
-> ### Nota: confirme, via log no portainer, se o certificado foi importado para o container / service. Do contrário a requisição será negada conforme demosntrado na mensagem abaixo:
+> ### Nota: confirme, via log no portainer, se o certificado foi importado para o container / service. Do contrário a requisição será negada conforme demonstrado na mensagem abaixo:
 > ```
 > ubuntu@dockercontroller01[~]$ docker push srvcontroller01.mydomain.net:5000/my-alpine
 > Using default tag: latest
