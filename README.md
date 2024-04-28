@@ -31,6 +31,63 @@ Você deve usar o "Registry" se quiser:
 
 Eu usei a documentação do Christian Lempa e recomendo uma atenção particular a parte da instalação do certificado no host do Docker, conforme está descrito na documentação oficial Docker: após a inclusão do certificado "ca.pem" é necessário reiniciar o Docker.
 
+
+```
+# Generate CA
+# 1. Generate RSA:
+
+openssl genrsa -aes256 -out ca-key.pem 4096
+
+# 2. Generate a public CA Cert:
+
+openssl req -new -x509 -sha256 -days 3650 -key ca-key.pem -out ca.pem
+
+# Optional Stage: View Certificate's Content:
+
+openssl x509 -in ca.pem -text
+openssl x509 -in ca.pem -purpose -noout -text
+
+# Generate Certificate
+# 1. Create a RSA key:
+
+openssl genrsa -out cert-key.pem 4096
+
+# 2. Create a Certificate Signing Request (CSR):
+
+openssl req -new -sha256 -subj "/CN=HomeLab DevOps" -key cert-key.pem -out cert.csr
+
+# 3. Create a extfile with all the alternative names (example):
+
+echo "subjectAltName=DNS:your-dns.record,IP:257.10.10.1" >> extfile.cnf && echo extendedKeyUsage = serverAuth >> extfile.cnf
+
+# 4. Create the certificate:
+
+openssl x509 -req -sha256 -days 3650 -in cert.csr -CA ca.pem -CAkey ca-key.pem -out cert-jager.net.pem -extfile extfile.cnf -CAcreateserial
+
+# 5. Verify Certificates:
+
+openssl x509 -in cert-jager.net.pem -purpose -noout -text
+openssl verify -CAfile ca.pem -verbose cert-jager.net.pem 
+
+# 6. Create a Certificate Signing Request (CSR) for Registry Docker:
+
+openssl req -new -sha256 -subj "/CN=Docker Registry Homelab" -key cert-key.pem -out docker-registry/docker-registry.csr
+
+# 7. Create a extfile with all the alternative names (example):
+
+echo "subjectAltName=DNS:your-dns.record,IP:257.10.10.1" >> docker-registry/extfile.cnf && echo extendedKeyUsage = serverAuth >> docker-registry/extfile.cnf
+
+# 8. Create the certificate for Registry Private:
+
+openssl x509 -req -sha256 -days 3650 -in docker-registry/docker-registry.csr -CA ca.pem -CAkey ca-key.pem -out docker-registry/docker-registry.crt -extfile docker-registry/extfile.cnf -CAcreateserial
+
+# 9. Verify Certificates:
+
+openssl verify -CAfile ca.pem -verbose docker-registry/docker-registry.crt 
+openssl x509 -in docker-registry/docker-registry.crt -purpose -noout -text
+
+```
+
 Fontes:
 
 - Install the CA Cert as a trusted root CA - Christian Lempa: [https://github.com/ChristianLempa/cheat-sheets/blob/main/misc/ssl-certs.md](https://github.com/ChristianLempa/cheat-sheets/blob/main/misc/ssl-certs.md#install-the-ca-cert-as-a-trusted-root-ca)
