@@ -27,7 +27,7 @@ Você deve usar o "Registry" se quiser:
 5. Implementar o container / serviço do Registry Private.
 
 
-#### 1 - Criar um certificado autoassinado:
+### 1 - Criar um certificado autoassinado:
 
 Eu usei a documentação do Christian Lempa e recomendo uma atenção particular a parte da instalação do certificado no host do Docker, conforme está descrito na documentação oficial Docker: após a inclusão do certificado "ca.pem" é necessário reiniciar o Docker.
 
@@ -36,7 +36,7 @@ Fontes:
 - Install the CA Cert as a trusted root CA - Christian Lempa: [https://github.com/ChristianLempa/cheat-sheets/blob/main/misc/ssl-certs.md](https://github.com/ChristianLempa/cheat-sheets/blob/main/misc/ssl-certs.md#install-the-ca-cert-as-a-trusted-root-ca)
 - Testing an Insecure registry - Docker: https://docker-docs.uclv.cu/registry/insecure/#use-self-signed-certificates
 
-#### 2 - Configurar um cluster Docker Swarm
+### 2 - Configurar um cluster Docker Swarm
 
 Eu estou usando o Proxmox com imagem Ubuntu e automação usando Terraform para construir o meu cluster: https://github.com/zecaoliveira/proxmox-terraform e usei a documentação oficial:
 
@@ -45,13 +45,13 @@ Fontes:
 - Getting started with Swarm mode: https://docs.docker.com/engine/swarm/swarm-tutorial/
 - Create a swarm: https://docs.docker.com/engine/swarm/swarm-tutorial/create-swarm/
 
-#### 3 - Deploy Portainer CE
+### 3 - Deploy Portainer CE
 
 Fonte:
 
 - Install Portainer CE with Docker Swarm on Linux: https://docs.portainer.io/start/install-ce/server/swarm/linux
 
-#### 4 - Deploy DNS Server in Docker Swarm
+### 4 - Deploy DNS Server in Docker Swarm
 
 Segue a minha documentação no GitHub: https://github.com/zecaoliveira/dns-in-docker-swarm
 
@@ -67,7 +67,7 @@ Após a implantação do DNS crie um apontamento para o controller do swarm, exe
 
 Com a configuração acima qualquer máquina usando o servidor de DNS 172.31.0.10 consegue resolver o nome myregistry.mydomain.net para o IP 172.31.0.100.
 
-#### 5 - Use self-signed certificates for private registry in Docker Swarm
+### 5 - Use self-signed certificates for private registry in Docker Swarm
 
 Como a própria documentação menciona este modelo é o mais seguro se comparado ao de usar HTTP no lugar do HTTPS inserindo no arquivo 'daemon.json' (/etc/docker/daemon.json) o apontamento do nome do host:
 ```
