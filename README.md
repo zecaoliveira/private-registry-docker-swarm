@@ -103,7 +103,7 @@ $ sudo update-ca-certificates
 $ sudo reboot
 ```
 
-5.4 - Após o processo de reboot crie um container com usando os comandos abaixo:
+5.4 - Após o processo de reboot crie um container usando o script abaixo:
 ```
 docker service create --name my_registry --publish=5000:5000 \
 --constraint=node.role==manager \
