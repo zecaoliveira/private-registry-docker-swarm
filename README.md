@@ -1,7 +1,5 @@
 # Private registry Docker Swarm
 
-#### Using private registry in Docker Swarm (Thanks a lot Pav: https://codeblog.dotsandbrackets.com/private-registry-swarm/#comment-292784
-
 Olá a todos.
 
 Tenho um ambiente de estudos DevOps usando a solução de orquestração Docker Swarm.
