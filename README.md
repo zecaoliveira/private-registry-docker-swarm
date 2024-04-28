@@ -55,6 +55,18 @@ Fonte:
 
 Segue a minha documentação no GitHub: https://github.com/zecaoliveira/dns-in-docker-swarm
 
+Após a implantação do DNS crie um apontamento para o controller do swarm, exemplo:
+
+- O servidor de DNS atende as requisições da rede no IP: 172.31.0.10
+- O controller está configurado para usar o endereço IP: 172.31.0.100.
+- Os nodes estão usando os endereços IP's 172.31.0.101 e 102 respectivamente.
+- Criar um apontamento DNS do tipo A no PiHole para o controller:
+  - Tipo de ponteiro: A
+  - Nome: myregistry.mydomain.net
+  - IP: 172.31.0.100
+
+Com a configuração acima qualquer máquina usando o servidor de DNS 172.31.0.10 consegue resolver o nome myregistry.mydomain.net para o IP 172.31.0.100.
+
 #### 5 - Use self-signed certificates for private registry in Docker Swarm
 
 Como a própria documentação menciona este modelo é o mais seguro se comparado ao de usar HTTP no lugar do HTTPS inserindo no arquivo 'daemon.json' (/etc/docker/daemon.json) o apontamento do nome do host:
