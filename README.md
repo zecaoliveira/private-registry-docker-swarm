@@ -234,7 +234,40 @@ Pelo Portainer dá para acompanhar os logs das solicitações efetuadas pelo scr
 
 ![image](https://github.com/zecaoliveira/private-registry-docker-swarm/assets/42525959/ca70c3d3-159f-4c09-9d23-11143d6183fd)
 
+Testes com NGINX:ALPINE:
+
+- Criação da imagem:
+
+```
+$./nginx_image.sh
+```
+![image](https://github.com/zecaoliveira/private-registry-docker-swarm/assets/42525959/35dca702-0160-41ab-a595-44cd247f3b72)
+
+- Criação do serviço usando a imagem my_nginx:v3:
+
+```
+ $ docker service create --name=nginx-server srvnode01.jager.net:5000/my_nginx:v3
+```
+![image](https://github.com/zecaoliveira/private-registry-docker-swarm/assets/42525959/f4af7af6-b94e-4881-a3e6-98804a9dc072)
+
+- Aumentando (scale) o número de máquinas para testar a replicação usando as imagens criadas no controller através do registry services nos outros nós:
+
+```
+$ docker service ps nginx-server
+```
+
+![image](https://github.com/zecaoliveira/private-registry-docker-swarm/assets/42525959/814b3a40-2972-4f6e-a336-f87049beddf4)
+
+![image](https://github.com/zecaoliveira/private-registry-docker-swarm/assets/42525959/cc735183-2aa7-4b13-9cae-392bdbfe79e4)
+
+- Deletando o serviço:
+
+![image](https://github.com/zecaoliveira/private-registry-docker-swarm/assets/42525959/9b0b15f1-eb7d-47c8-8071-1c5c18ae2a31)
+
+
 Com isso nós temos todo um ambiente de estudo para praticar um ambiente de desenvolvimento completo usando CI/CD.
+
+_________________________________________________________________________________________________________________
 
 # Observações importantes:
 
